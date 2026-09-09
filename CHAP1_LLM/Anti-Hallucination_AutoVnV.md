@@ -58,14 +58,14 @@ Instead of forcing all inference into `Inference (low confidence)`, distinguish 
 
 - **Verified Fact**
 - **Derived / Calculated Result**
-- **Inference â€“ High Confidence**
-- **Inference â€“ Medium Confidence**
-- **Inference â€“ Low Confidence**
+- **Inference - High Confidence**
+- **Inference - Medium Confidence**
+- **Inference - Low Confidence**
 - **Unknown**
 
 Example:
 
-- Requirement: Brake pressure shall reach 5.0 bar Â±0.2 bar.
+- Requirement: Brake pressure shall reach 5.0 bar +/-0.2 bar.
 - Measurement: 4.61 bar.
 - Derived result: 4.61 bar is below the minimum acceptable value of 4.8 bar.
 - Verdict: FAIL.
@@ -78,12 +78,12 @@ This is a deterministic engineering derivation, not a low-confidence inference.
 
 Every important engineering conclusion should preferably cite:
 
-`Document â†’ Requirement ID â†’ Revision â†’ Section`
+`Document -> Requirement ID -> Revision -> Section`
 
 Example:
 
-> Expected behaviour: Pressure â‰¥ 4.8 bar  
-> Source: SYS_REQ_1456, Rev C, Â§4.3.2
+> Expected behaviour: Pressure >= 4.8 bar
+> Source: SYS_REQ_1456, Rev C, Section 4.3.2
 
 For signal analysis:
 
@@ -99,10 +99,10 @@ Automotive projects frequently contain conflicting information.
 Example:
 
 **System requirement**
-- Intervention â‰¤ 500 ms
+- Intervention <= 500 ms
 
 **Test specification**
-- Check intervention â‰¤ 300 ms
+- Check intervention <= 300 ms
 
 The AI must not silently choose one.
 
@@ -118,7 +118,7 @@ For defect analysis, use a structure such as:
 
 | Category | Example |
 |---|---|
-| Requirement | Activation â‰¤ 500 ms |
+| Requirement | Activation <= 500 ms |
 | Observation | Activation occurred at 685 ms |
 | Deviation | +185 ms |
 | Result | FAIL |
@@ -172,7 +172,7 @@ EVIDENCE RULES:
 3. Every engineering assertion must be traceable to its source,
    preferably using:
 
-   Document â†’ Requirement ID â†’ Revision â†’ Section
+    Document -> Requirement ID -> Revision -> Section
 
 4. Clearly distinguish:
 
@@ -243,25 +243,25 @@ EVIDENCE RULES:
 
 PROCESS:
 
-Step 1 â€“ Identify the engineering question.
+Step 1 - Identify the engineering question.
 
-Step 2 â€“ Extract applicable requirements and evidence.
+Step 2 - Extract applicable requirements and evidence.
 
-Step 3 â€“ Separate verified facts from observations and assumptions.
+Step 3 - Separate verified facts from observations and assumptions.
 
-Step 4 â€“ Identify missing or unknown information.
+Step 4 - Identify missing or unknown information.
 
-Step 5 â€“ Identify source conflicts.
+Step 5 - Identify source conflicts.
 
-Step 6 â€“ Perform deterministic calculations or derivations if required.
+Step 6 - Perform deterministic calculations or derivations if required.
 
-Step 7 â€“ Compare expected behaviour against observed behaviour.
+Step 7 - Compare expected behaviour against observed behaviour.
 
-Step 8 â€“ Generate the engineering conclusion.
+Step 8 - Generate the engineering conclusion.
 
-Step 9 â€“ Verify every conclusion against supplied evidence.
+Step 9 - Verify every conclusion against supplied evidence.
 
-Step 10 â€“ Perform a final hallucination, traceability, and contradiction check.
+Step 10 - Perform a final hallucination, traceability, and contradiction check.
 
 
 OUTPUT FORMAT:
@@ -302,7 +302,7 @@ Only when supported by evidence. Clearly label confidence.
 
 | Automotive AI Use Case | Suitability |
 |---|---|
-| Requirements â†’ test-case generation | Very High |
+| Requirements -> test-case generation | Very High |
 | Test-case review | Very High |
 | SYS.4 / SYS.5 / SWE.6 traceability checker | Very High |
 | CAN-log analysis | Very High |
@@ -322,17 +322,17 @@ For an enterprise Automotive V&V AI assistant, anti-hallucination should be trea
 
 ```text
 Engineering Data
-      â†“
+    v
 Retrieval / RAG
-      â†“
+    v
 Evidence Filtering
-      â†“
+    v
 Anti-Hallucination Rules
-      â†“
+    v
 Reasoning / Analysis
-      â†“
+    v
 Traceability Validation
-      â†“
+    v
 Human Review / Approval
 ```
 

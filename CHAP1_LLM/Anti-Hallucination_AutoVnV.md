@@ -2,52 +2,13 @@
 
 ## BLUF
 
-The original anti-hallucination rules from the AI course are a strong foundation for Automotive V&V use cases, but they should not be used unchanged.
+Automotive Embedded Systems V&V requires evidence-grounded AI reasoning. The AI must use only supplied or approved engineering evidence, distinguish verified facts from derivations and hypotheses, expose missing information and source conflicts, and keep every engineering conclusion traceable.
 
-The original approach is especially useful because it:
-
-- Restricts the AI to supplied evidence.
-- Prevents invented functions, APIs, error codes, UI elements, or behaviour.
-- Requires missing information to be reported explicitly.
-- Requires assertions to be traceable.
-- Separates inference from verified facts.
-- Includes a self-check for hallucinations and contradictions.
-
-For Automotive Embedded Systems V&V, the same principle should be extended to engineering artefacts such as requirements, architecture, DBC/ARXML, diagnostic specifications, HIL configurations, CAN traces, test specifications, calibration data, defect reports, and safety requirements.
+These rules apply to engineering artefacts such as requirements, architecture, DBC/ARXML, diagnostic specifications, HIL configurations, CAN traces, test specifications, calibration data, defect reports, and safety requirements.
 
 ---
 
-## 1. Suitability for Automotive V&V
-
-### What is already strong
-
-| Course Rule | Automotive V&V Relevance | Assessment |
-|---|---|---|
-| Do not invent features/APIs/behaviour | Prevents invented ECU functions, signals, diagnostics, and expected behaviour | Excellent |
-| Do not assume default or typical behaviour | Important because ECU/project implementations vary | Excellent |
-| Explicitly report insufficient information | Better than fabricating expected results | Excellent |
-| Every assertion must be traceable | Supports requirements-to-test traceability | Critical |
-| Label inference explicitly | Useful in debugging and defect analysis | Excellent |
-| Extract facts â†’ unknowns â†’ output â†’ self-check | Strong engineering workflow | Excellent |
-
----
-
-## 2. Main Limitation of the Generic QA Version
-
-The original source list is primarily suited to general software QA:
-
-- PRD
-- API documentation
-- Logs
-- Screenshots
-- Test data
-- User input
-
-For Automotive V&V, the allowed evidence set must be expanded.
-
----
-
-## 3. Recommended Automotive V&V Evidence Sources
+## 1. Automotive V&V Evidence Sources
 
 | Source | Automotive Example |
 |---|---|
@@ -70,9 +31,9 @@ For Automotive V&V, the allowed evidence set must be expanded.
 
 ---
 
-## 4. Recommended Enhancements
+## 2. Core Controls
 
-### 4.1 Add an Evidence Hierarchy
+### 2.1 Add an Evidence Hierarchy
 
 Not every source has equal authority.
 
@@ -91,7 +52,7 @@ The AI must not silently treat all sources as equally authoritative.
 
 ---
 
-### 4.2 Improve Inference Classification
+### 2.2 Improve Inference Classification
 
 Instead of forcing all inference into `Inference (low confidence)`, distinguish between:
 
@@ -113,7 +74,7 @@ This is a deterministic engineering derivation, not a low-confidence inference.
 
 ---
 
-### 4.3 Require Engineering Traceability
+### 2.3 Require Engineering Traceability
 
 Every important engineering conclusion should preferably cite:
 
@@ -131,7 +92,7 @@ For signal analysis:
 
 ---
 
-### 4.4 Add a Source-Conflict Rule
+### 2.4 Add a Source-Conflict Rule
 
 Automotive projects frequently contain conflicting information.
 
@@ -151,7 +112,7 @@ Recommended response:
 
 ---
 
-### 4.5 Separate Requirement, Observation, Deviation, and Conclusion
+### 2.5 Separate Requirement, Observation, Deviation, and Conclusion
 
 For defect analysis, use a structure such as:
 
@@ -168,7 +129,7 @@ A failed test confirms deviation from expected behaviour. It does **not** automa
 
 ---
 
-# 5. Recommended Automotive V&V Anti-Hallucination Prompt
+# 3. Automotive V&V Anti-Hallucination Prompt
 
 ```text
 ROLE:
@@ -337,7 +298,7 @@ Only when supported by evidence. Clearly label confidence.
 
 ---
 
-# 6. Recommended Use Cases
+# 4. Automotive V&V Use Cases
 
 | Automotive AI Use Case | Suitability |
 |---|---|
@@ -355,7 +316,7 @@ Only when supported by evidence. Clearly label confidence.
 
 ---
 
-# 7. Recommended Architecture
+# 5. Recommended Architecture
 
 For an enterprise Automotive V&V AI assistant, anti-hallucination should be treated as an architectural layer rather than only as a prompt.
 
@@ -389,11 +350,9 @@ For higher-assurance applications, additional controls can include:
 
 ---
 
-# 8. Final Recommendation
+# 6. Final Recommendation
 
-Retain the original course concept.
-
-For Automotive Embedded Systems V&V, upgrade it from a generic software-QA prompt into an **evidence-grounded engineering reasoning framework** with:
+Use this as an **evidence-grounded engineering reasoning framework** with:
 
 1. Automotive-specific evidence sources
 2. Source hierarchy
